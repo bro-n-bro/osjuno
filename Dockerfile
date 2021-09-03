@@ -5,7 +5,8 @@ COPY . ./
 RUN make build
 
 FROM alpine:latest
+WORKDIR osjuno
 COPY --from=builder /go/src/github.com/bro-n-bro/osjuno/build/osjuno /usr/bin/osjuno
-RUN osjuno init --home /osjuno
-# todo entrypoint
-CMD [ "osjuno", "parse", "--home", "/osjuno"]
+COPY ./entrypoint.sh ./
+ENTRYPOINT [ "./entrypoint.sh" ]
+CMD [ "osjuno" ]

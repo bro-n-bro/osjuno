@@ -11,11 +11,11 @@ services:
     volumes:
       - ./database/schema/:/docker-entrypoint-initdb.d/
     environment:
-      - POSTGRES_DB=${POSTGRES_DB_NAME}
-      - POSTGRES_USER=${POSTGRES_USER_NAME}
-      - POSTGRES_PASSWORD=${POSTGRES_DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
     ports:
-      - ${POSTGRES_DB_PORT}:5432
+      - ${DB_PORT}:5432
 
   graphql-engine:
     image: hasura/graphql-engine:latest
@@ -24,7 +24,7 @@ services:
     depends_on:
       - "postgres"
     environment:
-      HASURA_GRAPHQL_DATABASE_URL: postgres://${POSTGRES_USER_NAME}:${POSTGRES_DB_PASSWORD}@postgres:${POSTGRES_DB_PORT}/${POSTGRES_DB_NAME}
+      HASURA_GRAPHQL_DATABASE_URL: postgres://${DB_USER}:${DB_PASSWORD}@postgres:${DB_PORT}/${DB_NAME}
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
       HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
       HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_ADMIN_SECRET}
@@ -32,7 +32,6 @@ services:
     ports:
       - ${HASURA_PORT}:8080
 
-  # todo specify node via env here
   osjuno:
     build:
       context: .
@@ -40,5 +39,12 @@ services:
     restart: always
     depends_on:
       - "postgres"
+    environment:
+      OSJUNO_DATABASE_HOST: postgres
+      OSJUNO_DATABASE_PORT: ${DB_PORT}
+      OSJUNO_DATABASE_NAME: ${DB_NAME}
+      OSJUNO_DATABASE_USER: ${DB_USER}
+      OSJUNO_DATABASE_PASSWORD: ${DB_PASSWORD}
+      OSJUNO_RPC_ADDRESS: ${OSMO_RPC_ADDRESS}
     volumes:
-      - ~/.osjuno:/osjuno
+      - ~/.osjuno:/osjuno/.osjuno
