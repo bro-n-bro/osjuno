@@ -1,13 +1,13 @@
 package main
 
 import (
+	"github.com/bro-n-bro/osjuno/modules"
 	"github.com/cosmos/cosmos-sdk/simapp"
 	"github.com/cosmos/cosmos-sdk/types/module"
 	"github.com/desmos-labs/juno/cmd"
 	parsecmd "github.com/desmos-labs/juno/cmd/parse"
 	"github.com/desmos-labs/juno/modules/messages"
 	"github.com/forbole/bdjuno/database"
-	"github.com/forbole/bdjuno/modules"
 	"github.com/forbole/bdjuno/types/config"
 
 	osmosismessages "github.com/bro-n-bro/osjuno/modules/messages"
