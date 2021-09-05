@@ -22,5 +22,11 @@ type Registrar struct {
 }
 
 func (r *Registrar) BuildModules(ctx junoRegistrar.Context) modules.Modules {
-	return r.bdjunoRegistrar.BuildModules(ctx)
+	cosmosMoules := r.bdjunoRegistrar.BuildModules(ctx)
+	osmosisModules := r.buildOsmosisMoules(ctx)
+	return append(cosmosMoules, osmosisModules...)
+}
+
+func (r *Registrar) buildOsmosisMoules(ctx junoRegistrar.Context) modules.Modules {
+	return []modules.Module{}
 }
