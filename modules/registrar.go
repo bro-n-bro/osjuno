@@ -1,6 +1,7 @@
 package modules
 
 import (
+	"github.com/bro-n-bro/osjuno/modules/gamm"
 	"github.com/desmos-labs/juno/modules"
 	"github.com/desmos-labs/juno/modules/messages"
 	junoRegistrar "github.com/desmos-labs/juno/modules/registrar"
@@ -28,5 +29,7 @@ func (r *Registrar) BuildModules(ctx junoRegistrar.Context) modules.Modules {
 }
 
 func (r *Registrar) buildOsmosisMoules(ctx junoRegistrar.Context) modules.Modules {
-	return []modules.Module{}
+	return []modules.Module{
+		gamm.NewModule(),
+	}
 }
