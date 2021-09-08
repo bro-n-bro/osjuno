@@ -1,6 +1,7 @@
 package gamm
 
 import (
+	"github.com/bro-n-bro/osjuno/database"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/desmos-labs/juno/modules"
 	junotypes "github.com/desmos-labs/juno/types"
@@ -13,10 +14,13 @@ var (
 )
 
 type Module struct {
+	db *database.OsmosisDb
 }
 
-func NewModule() *Module {
-	return &Module{}
+func NewModule(db *database.OsmosisDb) *Module {
+	return &Module{
+		db: db,
+	}
 }
 
 func (m *Module) Name() string {

@@ -12,8 +12,11 @@ func (m *Module) handleSwapExactAmountIn(index int, msg *gammtypes.MsgSwapExactA
 	if tx.Code != 0 {
 		return nil
 	}
-	_, err := getChainedSwapFromTxLogs(msg, tx.Logs)
-	return err
+	swap, err := getChainedSwapFromTxLogs(msg, tx.Logs)
+	if err != nil {
+		return err
+	}
+	return m.db.SaveChainedSwap(tx, *swap)
 }
 
 func getChainedSwapFromTxLogs(
