@@ -9,7 +9,9 @@ replace github.com/cosmos/cosmos-sdk => github.com/osmosis-labs/cosmos-sdk v0.42
 require (
 	github.com/cosmos/cosmos-sdk v0.42.9
 	github.com/desmos-labs/juno v0.0.0-20210820090829-4142e0029177
-	github.com/forbole/bdjuno v0.0.0-20210902082946-0f488bf0eb30 // indirect
+	github.com/forbole/bdjuno v0.0.0-20210902082946-0f488bf0eb30
+	github.com/jmoiron/sqlx v1.2.1-0.20200324155115-ee514944af4b
+	github.com/lib/pq v1.9.0
 	github.com/osmosis-labs/osmosis v1.0.3
 	github.com/tendermint/tendermint v0.34.12 // indirect
 )

@@ -1,10 +1,12 @@
 package modules
 
 import (
+	"github.com/bro-n-bro/osjuno/database"
 	"github.com/bro-n-bro/osjuno/modules/gamm"
 	"github.com/desmos-labs/juno/modules"
 	"github.com/desmos-labs/juno/modules/messages"
 	junoRegistrar "github.com/desmos-labs/juno/modules/registrar"
+	bdjunodb "github.com/forbole/bdjuno/database"
 	bdjunoModule "github.com/forbole/bdjuno/modules"
 )
 
@@ -29,7 +31,12 @@ func (r *Registrar) BuildModules(ctx junoRegistrar.Context) modules.Modules {
 }
 
 func (r *Registrar) buildOsmosisMoules(ctx junoRegistrar.Context) modules.Modules {
+	bigDipperBd := bdjunodb.Cast(ctx.Database)
+	osmosisDb := &database.OsmosisDb{
+		Database: bigDipperBd.Database,
+		Sqlx:     bigDipperBd.Sqlx,
+	}
 	return []modules.Module{
-		gamm.NewModule(),
+		gamm.NewModule(osmosisDb),
 	}
 }
