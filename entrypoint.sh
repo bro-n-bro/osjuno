@@ -2,12 +2,15 @@
 set -e
 
 osjuno_init() {
-  flags="--cosmos-prefix osmosis"
+  flags="--cosmos-prefix osmo"
   if [[ ! -z "${OSJUNO_CLIENT_NAME}" ]]; then
     flags=" ${flags} --client-name ${OSJUNO_CLIENT_NAME}"
   fi
-  if [[ ! -z "${OSJUNO_COSMOS_MODULE}" ]]; then
+  if [[ ! -z "${OSJUNO_COSMOS_MODULE}" ]]
+  then
     flags=" ${flags} --cosmos-modules ${OSJUNO_COSMOS_MODULE}"
+  else
+    flags=" ${flags} --cosmos-modules auth,osmosis/gamm"
   fi
   if [[ ! -z "${OSJUNO_DATABASE_NAME}" ]]; then
     flags=" ${flags} --database-name ${OSJUNO_DATABASE_NAME}"
